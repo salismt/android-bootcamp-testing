@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.BaseColumns;
+import android.support.annotation.DrawableRes;
 
 public class GoTCharacter implements Parcelable, BaseColumns {
     public static final String FIRST_NAME = "first_name";
@@ -30,7 +31,7 @@ public class GoTCharacter implements Parcelable, BaseColumns {
         this(0, firstName, lastName, thumbUrl, fullUrl, alive, house, houseResId, description);
     }
 
-    public GoTCharacter(int id, String firstName, String lastName, String thumbUrl, String fullUrl, boolean alive, String house, int houseResId, String description) {
+    public GoTCharacter(int id, String firstName, String lastName, String thumbUrl, String fullUrl, boolean alive, String house, @DrawableRes int houseResId, String description) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -48,6 +49,10 @@ public class GoTCharacter implements Parcelable, BaseColumns {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public String getFullName() {
+        return firstName + "" + lastName;
     }
 
     public String getThumbUrl() {
