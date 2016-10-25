@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,17 +27,33 @@ public class DetailActivity extends AppCompatActivity {
         }
         GoTCharacter gotCharacter = getIntent().getParcelableExtra(EXTRA_CHARACTER);
         setTitle(gotCharacter.getFirstName() + " " + gotCharacter.getLastName());
+
         Picasso.with(this)
                 .load(Uri.parse(gotCharacter.getFullUrl()))
                 .placeholder(R.drawable.profile_placeholder_full)
                 .error(R.drawable.profile_placeholder_error_full)
                 .into((ImageView) findViewById(R.id.image_character));
-        ((ImageView) findViewById(R.id.image_house)).setImageResource(gotCharacter.getHouseResId());
+
         ((TextView) findViewById(R.id.text_house_name)).setText(gotCharacter.getHouse());
         TextView characterDetails = (TextView) findViewById(R.id.text_character_story);
         characterDetails.setText(gotCharacter.getDescription());
-        int color = gotCharacter.isAlive() ? Color.GREEN : Color.RED;
-        characterDetails.setTextColor(color);
+        if (gotCharacter.isAlive()) {
+            characterDetails.setTextColor(Color.GREEN);
+        } else {
+            characterDetails.setTextColor(Color.RED);
+        }
+
+        if (characterDetails.getText().toString().length() < 10) {
+            characterDetails.setVisibility(View.GONE);
+        } else {
+            characterDetails.setVisibility(View.VISIBLE);
+        }
+
+        if ((gotCharacter.getFirstName() + " " + gotCharacter.getLastName()).contains("stark")) {
+            ((TextView) findViewById(R.id.text_character_name)).setText("Chateau " + gotCharacter.getHouse());
+        }
+
+        ((ImageView) findViewById(R.id.image_house)).setImageResource(gotCharacter.getHouseResId());
     }
 
     @Override
