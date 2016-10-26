@@ -49,8 +49,8 @@ public class DetailActivity extends AppCompatActivity {
             characterDetails.setVisibility(View.VISIBLE);
         }
 
-        if ((gotCharacter.getFirstName() + " " + gotCharacter.getLastName()).contains("stark")) {
-            ((TextView) findViewById(R.id.text_character_name)).setText("Chateau " + gotCharacter.getHouse());
+        if ((gotCharacter.getFirstName() + " " + gotCharacter.getLastName()).contains("Stark")) {
+            ((TextView) findViewById(R.id.text_house_name)).setText("Chateau " + gotCharacter.getHouse());
         }
 
         ((ImageView) findViewById(R.id.image_house)).setImageResource(gotCharacter.getHouseResId());
